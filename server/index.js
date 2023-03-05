@@ -27,6 +27,10 @@ io.on('connection', (socket) => {
     io.emit('newUserResponse', users);
   });
 
+  socket.on('typing', (data) => {
+    socket.broadcast.emit('typingResponse', data);
+  });
+
   // Broadcast received messages to all clients except sender.
   socket.on('message', (data) => {
     socket.broadcast.emit('messageResponse', data);
