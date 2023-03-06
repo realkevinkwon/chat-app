@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const ChatBody = ({ messages, typingStatus, lastMessageRef }) => {
+const ChatBody = ({ messages, typingStatus, setTypingStatus, lastMessageRef }) => {
   const navigate = useNavigate();
 
   const handleLeaveChat = () => {
@@ -9,6 +9,13 @@ const ChatBody = ({ messages, typingStatus, lastMessageRef }) => {
     navigate('/');
     window.location.reload();
   };
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setTypingStatus('');
+    }, 5000);
+    return () => clearTimeout(timeout);
+  }, [typingStatus]);
 
   return (
     <>

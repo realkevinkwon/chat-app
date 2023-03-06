@@ -27,6 +27,7 @@ const ChatPage = ({ socket }) => {
         <ChatBody
           messages={messages}
           typingStatus={typingStatus}
+          setTypingStatus={setTypingStatus}
           lastMessageRef={lastMessageRef}
         />
         <ChatFooter
