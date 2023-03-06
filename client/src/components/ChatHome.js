@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Home = ({ socket }) => {
+const ChatHome = ({ socket }) => {
   // TODO: replace with redirect?
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    sessionStorage.setItem('username', username);
-    socket.emit('newUser', { username, socketID: socket.id });
-    navigate('/chat');
+    if (username.length !== 0) {
+      sessionStorage.setItem('username', username);
+      socket.emit('newUser', { username, socketID: socket.id });
+      navigate('/chat');
+    }
   };
 
   return (
@@ -19,7 +21,6 @@ const Home = ({ socket }) => {
       <label htmlFor="username">Username</label>
       <input
         type="text"
-        minLength={3}
         name="username"
         id="username"
         className="username__input"
@@ -31,4 +32,4 @@ const Home = ({ socket }) => {
   );
 }
 
-export default Home;
+export default ChatHome;
