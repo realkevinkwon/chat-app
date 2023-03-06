@@ -31,9 +31,10 @@ const ChatPage = ({ socket }) => {
           lastMessageRef={lastMessageRef}
         />
         <ChatFooter
+          socket={socket}
           messages={messages}
           setMessages={setMessages}
-          socket={socket}
+          setTypingStatus={setTypingStatus}
         />
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const ChatFooter = ({ messages, setMessages, socket }) => {
+const ChatFooter = ({ socket, messages, setMessages, setTypingStatus }) => {
   const [message, setMessage] = useState('');
 
   const handleTyping = () => {
@@ -9,7 +9,7 @@ const ChatFooter = ({ messages, setMessages, socket }) => {
 
   const handleSendMessage = (e) => {
     e.preventDefault();
-
+    socket.emit('typing', '');
     const data = {
         text: message,
         name: sessionStorage.getItem('username'),

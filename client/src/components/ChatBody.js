@@ -15,7 +15,7 @@ const ChatBody = ({ messages, typingStatus, setTypingStatus, lastMessageRef }) =
       setTypingStatus('');
     }, 5000);
     return () => clearTimeout(timeout);
-  }, [typingStatus]);
+  }, [typingStatus, setTypingStatus]);
 
   return (
     <>
