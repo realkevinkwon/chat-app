@@ -1,13 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
-import ChatBar from './ChatBar';
+import ChatSidebar from './ChatSidebar';
+import ChatToolbar from './ChatToolbar';
 import ChatBody from './ChatBody';
 import ChatFooter from './ChatFooter';
 import ChatList from './ChatList';
 
-import { Typography } from '@mui/material';
 import { Box } from '@mui/material';
 import { CssBaseline } from '@mui/material';
-import { AppBar } from '@mui/material';
 import { Toolbar } from '@mui/material';
 import { TextField } from '@mui/material';
 import { Button } from '@mui/material';
@@ -61,13 +60,7 @@ const ChatPage = ({ socket }) => {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position='fixed' sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
-        <Toolbar>
-          <Typography variant='h6' noWrap component='div'>
-            COOL KIDS CHAT
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <ChatToolbar />
       <ChatList
         socket={socket}
         chats={chats}
@@ -90,11 +83,12 @@ const ChatPage = ({ socket }) => {
               setTypingStatus={setTypingStatus}
             />
           </div>
-          <ChatBar
-            users={users}
-          />
         </div>
       </Box>
+      <ChatSidebar
+        socket={socket}
+        users={users}
+      />
       <Dialog open={open} onClose={handleClose}>
         <Box sx={{ px: 3 }}>
           <DialogTitle>Create a new chat</DialogTitle>
