@@ -11,10 +11,10 @@ const ChatFooter = ({ socket, messages, setMessages, setTypingStatus }) => {
     e.preventDefault();
     socket.emit('typing', '');
     const data = {
-        text: message,
-        name: sessionStorage.getItem('username'),
-        id: `${socket.id}${Math.random()}`,
-        socketID: socket.id,
+      text: message,
+      name: sessionStorage.getItem('username'),
+      id: `${socket.id}${Math.random()}`,
+      socketID: socket.id,
     }
     setMessages([...messages, data]);
     if (message.trim() && sessionStorage.getItem('username')) {
