@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import { Box } from '@mui/material';
 import { Drawer } from '@mui/material';
@@ -9,28 +9,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const drawerWidth = 240;
 
-const ChatList = ({ socket }) => {
-  const [chats, setChats] = useState([]);
-
-  // useEffect(() => {
-  //   socket.on('createChatResponse', (new_chats) => setChats(new_chats));
-  // }, [socket, chats]);
-
-  const handleCreateChat = (e) => {
-    e.preventDefault();
-
-    // // Create new chat.
-    // const chat = {
-    //   name: 'chat_name',
-    //   id: `${Math.random()}`,
-    //   owner: sessionStorage.getItem('username'),
-    //   users: []
-    // }
-    // // Add new chat to this session.
-    // setChats([chat, ...chats]);
-    // socket.emit('createChat', chat);
-  };
-
+const ChatList = ({ chats, handleOpenCreateChat }) => {
   return (
     <Drawer
       variant="permanent"
@@ -43,18 +22,18 @@ const ChatList = ({ socket }) => {
       <Toolbar />
       <Box sx={{ overflow: 'auto' }}>
         <List>
-          {chats.map((chat, index) => (
-            <ListItem key={chat} disablePadding>
+          {chats.map((chat) => (
+            <ListItem key={chat.id} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
                   <ChatIcon />
                 </ListItemIcon>
-                <ListItemText primary={chat} />
+                <ListItemText primary={chat.name} />
               </ListItemButton>
             </ListItem>
           ))}
-          <ListItem key='newChat' disablePadding>
-            <ListItemButton onClick={handleCreateChat}>
+          <ListItem key='createChat' disablePadding>
+            <ListItemButton onClick={handleOpenCreateChat}>
               <ListItemIcon>
                 <AddCircleIcon />
               </ListItemIcon>
