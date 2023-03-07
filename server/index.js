@@ -7,11 +7,11 @@ const httpServer = createServer(app);
 const cors = require('cors');
 const io = new Server(httpServer, {
   cors: {
-    origin: 'http://localhost:3001'
+    origin: 'http://localhost:3000'
   }
 });
 
-const PORT = 3000;
+const PORT = 8080;
 
 app.use(cors());
 
