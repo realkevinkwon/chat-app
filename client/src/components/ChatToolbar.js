@@ -15,6 +15,7 @@ const buttonColor = 'lightgray';
 const ChatToolbar = () => {
   const navigate = useNavigate();
 
+  // Remove user and redirect to home page.
   const handleLeave = () => {
     sessionStorage.removeItem('username');
     navigate('/');
@@ -22,6 +23,7 @@ const ChatToolbar = () => {
   };
 
   return (
+    // Display title, user, and sign out button.
     <AppBar
       position='fixed'
       sx={{
@@ -40,6 +42,7 @@ const ChatToolbar = () => {
           </Typography>
         </Box>
         <Box>
+          {/* User button (note: does not do anything yet) */}
           <Button
             variant='outlined'
             endIcon={<ManageAccountsIcon />}
@@ -51,6 +54,7 @@ const ChatToolbar = () => {
           >
             {sessionStorage.getItem('username')}
           </Button>
+          {/* Log out button. */}
           <Button
             variant='outlined'
             endIcon={<LogoutIcon />}

@@ -10,7 +10,9 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 const ChatFooter = ({ socket, messages, setMessages, typingStatus }) => {
   const [message, setMessage] = useState('');
 
+  // Send typing status to other users.
   const handleTyping = (e) => {
+    // Send message when user presses Enter key.
     if (e.key === 'Enter') {
       handleSendMessage(e);
     } else {
@@ -18,9 +20,12 @@ const ChatFooter = ({ socket, messages, setMessages, typingStatus }) => {
     }
   };
 
+  // Send message to other users.
   const handleSendMessage = (e) => {
+    // Don't send when text field is empty.
     if (message !== '') {
       e.preventDefault();
+      // Immediately remove typing status.
       socket.emit('typing', '');
       const data = {
         text: message,
@@ -46,32 +51,23 @@ const ChatFooter = ({ socket, messages, setMessages, typingStatus }) => {
         pr: 50,
         pb: 1,
       }}
-      style={{
-        background: 'white',
-        boxShadow: 'none'
-      }}
+      style={{ background: 'white', boxShadow: 'none' }}
     >
-      <Box
-        sx={{
-          color: 'slategray',
-          fontStyle: 'italic',
-          pl: 5
-        }}
-      >
+      <Box sx={{ color: 'slategray', fontStyle: 'italic', pl: 5 }}>
         {typingStatus}
       </Box>
       <Toolbar>
-        <Grid
-          container
-          sx={{
-            border: 1,
-            justifyContent: 'space-between'
-          }}
-        >
+        <Grid container sx={{ border: 1, justifyContent: 'space-between' }}>
           <Grid item xs={11}>
+            {/* Text field for entering messages. */}
             <InputBase
               variant='standard'
               fullWidth
+              type='text'
+              placeholder='Enter message'
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              onKeyDown={handleTyping}
               sx={{
                 border: 1,
                 borderColor: 'lightgray',
@@ -81,15 +77,12 @@ const ChatFooter = ({ socket, messages, setMessages, typingStatus }) => {
                 px: 3,
                 mr: 3,
               }}
-              type='text'
-              placeholder='Enter message'
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              onKeyDown={handleTyping}
             />
           </Grid>
           <Grid item xs={1}>
+            {/* Send message button. Can also send with Enter key. */}
             <IconButton
+              onClick={handleSendMessage}
               sx={{
                 borderRadius: 10,
                 width: 40,
@@ -98,7 +91,6 @@ const ChatFooter = ({ socket, messages, setMessages, typingStatus }) => {
                 color: 'white',
                 backgroundColor: 'primary.main'
               }}
-              onClick={handleSendMessage}
             >
               <ArrowUpwardIcon />
             </IconButton>

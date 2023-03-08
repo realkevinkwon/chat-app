@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const ChatHome = ({ socket }) => {
-  // TODO: replace with redirect?
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
 
+  // Add user and redirect to chat page.
   const handleSubmit = (e) => {
     e.preventDefault();
     if (username.length !== 0) {
@@ -19,6 +19,7 @@ const ChatHome = ({ socket }) => {
     <form className="home__container" onSubmit={handleSubmit}>
       <h2 className="home__header">Sign in to open chat</h2>
       <label htmlFor="username">Username</label>
+      {/* Text field for entering username. */}
       <input
         type="text"
         name="username"

@@ -1,10 +1,10 @@
-// Load modules
+// Load modules.
 const express = require('express');
 const { createServer } = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
 
-// Initialize Express app, HTTP server, and socket.io
+// Initialize Express app, HTTP server, and socket.io.
 const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
@@ -13,89 +13,64 @@ const io = new Server(httpServer, {
   }
 });
 
+// Set port for listening for incoming connections.
 const PORT = 8080;
 
-// Enable Cross-Origin Resource Sharing
+// Enable Cross-Origin Resource Sharing.
 app.use(cors());
 
-/* [ 
-  { username: 'name', socketID: 'id' },
-  ...
-] */
+// Maintain list of users, chats, and messages.
 let users = [];
-
-/* chats = [
-  { 
-    name: 'chat_name',
-    id: 'id',
-    owner: 'name',
-    users: [
-      { username: 'name', socketID: 'id' },
-      ...
-    ]
-  },
-  ...
-] */
 let chats = [];
+let messages = [];
 
-// Run upon new connection.
+/* 
+  Run upon new connection (i.e., when a new user connects).
+
+  socket.on(...);
+    - Listen for incoming messages.
+  io.emit(...);
+    - Send message to all clients.
+  socket.broadcast.emit(...);
+    - Send message to all clients except sender.
+*/
 io.on('connection', (socket) => {
-  console.log(`${socket.id } user connected`);
+  console.log(`user connected (socketID: ${socket.id})`);
 
   // New user joins.
   socket.on('newUser', (user) => {
     users.push(user);
-    console.log(users);
-    io.emit('newUserResponse', users, chats);
+    io.emit('newUserResponse', users, chats, messages);
   });
 
-  // Chat is created.
+  // User creates a new chat.
   socket.on('createChat', (chat) => {
-    console.log(`${chat.name} has been created by ${chat.owner}`);
     chats.push(chat);
-    console.log(chats);
     socket.broadcast.emit('createChatResponse', chats);
   });
-
-  // Chat is deleted.
-  socket.on('deleteChat', (chat) => {
-    console.log(`${chat.name} has been deleted`)
-    chats = chats.filter((item) => item.id !== chat.id);
-    console.log(chats);
-    socket.broadcast.emit('deleteChatResponse', chats);
-  });
-
-  // // User joins a chat.
-  // socket.on('joinChat', (user, chat) => {
-
-  // });
-
-  // // User leaves a chat.
-  // socket.on('leaveChat', (user, chat) => {
-
-  // });
 
   // User begins typing.
   socket.on('typing', (status) => {
     socket.broadcast.emit('typingResponse', status);
   });
 
-  // User sends message.
-  // Broadcast received messages to all clients except sender.
+  // User sends a message.
   socket.on('message', (message) => {
+    messages.push(message);
     socket.broadcast.emit('messageResponse', message);
   });
 
   // User disconnects.
   socket.on('disconnect', () => {
-    console.log('a user disconnected');
+    console.log(`user disconnected (socketID: ${socket.id})`);
+    // Remove disconnecting user from users list.
     users = users.filter((user) => user.socketID !== socket.id);
-    console.log(users);
-    io.emit('newUserResponse', users, chats);
+    io.emit('newUserResponse', users, chats, messages);
     socket.disconnect();
   });
 });
 
+// Listen for incoming connections.
 httpServer.listen(PORT, () => {
   console.log(`listening on *:${PORT}`);
 });

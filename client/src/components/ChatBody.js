@@ -3,6 +3,7 @@ import React from 'react';
 import { Box, Stack } from '@mui/material';
 import { Typography } from '@mui/material';
 
+// Set style for both sender and receiver message bubbles.
 const messageStyle = {
   display: 'flex',
   wordBreak: 'break-word',
@@ -19,22 +20,26 @@ const ChatBody = ({ messages, lastMessageRef }) => {
       direction='column'
       width='100%'
     >
+      {/* 
+        Display differing message bubbles for
+        messages that were sent versus received.
+      */}
       {messages.map((message) =>
         message.name === sessionStorage.getItem('username') ? (
-          <Stack alignSelf='flex-end'>
+          // Sent messages.
+          <Stack key={message.id} alignSelf='flex-end'>
             <Box alignSelf='flex-end' pr={1}>You</Box>
             <Box
               sx={messageStyle}
               bgcolor='primary.main'
               color='white'
             >
-              <Typography>
-                {message.text}
-              </Typography>
+              <Typography>{message.text}</Typography>
             </Box>
           </Stack>
         ) : (
-          <Stack alignSelf='flex-start'>
+          // Received messages.
+          <Stack key={message.id} alignSelf='flex-start'>
             <Box alignSelf='flex-start' pl={1}>{message.name}</Box>
             <Box
               sx={messageStyle}
@@ -48,6 +53,7 @@ const ChatBody = ({ messages, lastMessageRef }) => {
           </Stack>
         )
       )}
+      {/* Automatically scroll to latest message. */}
       <div ref={lastMessageRef} />
     </Stack>
   );

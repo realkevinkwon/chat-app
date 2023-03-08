@@ -6,33 +6,38 @@ import { Toolbar } from '@mui/material';
 import { List, ListItem, ListItemIcon, ListItemButton, ListItemText } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-const drawerWidth = 160;
+const sidebarWidth = 160;
 
 const ChatSidebar = ({ socket, users }) => {
   return (
+    // Permanent Drawer with list of active users minus the current user.
     <Drawer
       variant="permanent"
-      sx={{
-        width: drawerWidth,
-        flexShrink: 0,
-        [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
-      }}
       anchor='right'
+      sx={{
+        width: sidebarWidth,
+        flexShrink: 0,
+        [`& .MuiDrawer-paper`]: {
+          width: sidebarWidth,
+          boxSizing: 'border-box'
+        }
+      }}
     >
+      {/* Prevent AppBar from overlapping with Drawer. */}
       <Toolbar />
       <Box sx={{ overflow: 'auto' }}>
         <List>
-          {users.filter(({ username, socketID }) => 
+          {/* Filter current user. */}
+          {users.filter(({ username, socketID }) =>
             socketID !== socket.id).map(({ username, socketID }) => (
               <ListItem key={socketID} disablePadding>
                 <ListItemButton>
-                  <ListItemIcon>
-                    <AccountCircleIcon />
-                  </ListItemIcon>
+                  <ListItemIcon><AccountCircleIcon /></ListItemIcon>
                   <ListItemText primary={username} />
                 </ListItemButton>
               </ListItem>
-          ))}
+            ))
+          }
         </List>
       </Box>
     </Drawer>
