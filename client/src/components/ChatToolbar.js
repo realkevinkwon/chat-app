@@ -9,6 +9,9 @@ import { Box } from '@mui/material';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import LogoutIcon from '@mui/icons-material/Logout';
 
+const buttonRadius = 3;
+const buttonColor = 'lightgray';
+
 const ChatToolbar = () => {
   const navigate = useNavigate();
 
@@ -32,7 +35,7 @@ const ChatToolbar = () => {
     >
       <Toolbar sx={{ justifyContent: 'space-between' }}>
         <Box>
-          <Typography variant='h6' noWrap component='div'>
+          <Typography variant='h6' noWrap component='div' fontWeight='300'>
             kevin's chat app
           </Typography>
         </Box>
@@ -40,7 +43,11 @@ const ChatToolbar = () => {
           <Button
             variant='outlined'
             endIcon={<ManageAccountsIcon />}
-            sx={{ mx: 3 }}
+            sx={{
+              mx: 3,
+              borderColor: buttonColor,
+              borderRadius: buttonRadius
+            }}
           >
             {sessionStorage.getItem('username')}
           </Button>
@@ -48,6 +55,10 @@ const ChatToolbar = () => {
             variant='outlined'
             endIcon={<LogoutIcon />}
             onClick={handleLeave}
+            sx={{
+              borderColor: buttonColor,
+              borderRadius: buttonRadius
+            }}
           >
             SIGN OUT
           </Button>

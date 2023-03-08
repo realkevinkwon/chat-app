@@ -6,7 +6,7 @@ import { Toolbar } from '@mui/material';
 import { List, ListItem, ListItemIcon, ListItemButton, ListItemText } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-const drawerWidth = 240;
+const drawerWidth = 160;
 
 const ChatSidebar = ({ socket, users }) => {
   return (

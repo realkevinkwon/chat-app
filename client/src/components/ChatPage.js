@@ -68,22 +68,18 @@ const ChatPage = ({ socket }) => {
       />
       <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-        <div className='chat'>
-          <div className='chat__main'>
-            <ChatBody
-              messages={messages}
-              typingStatus={typingStatus}
-              setTypingStatus={setTypingStatus}
-              lastMessageRef={lastMessageRef}
-            />
-            <ChatFooter
-              socket={socket}
-              messages={messages}
-              setMessages={setMessages}
-              setTypingStatus={setTypingStatus}
-            />
-          </div>
-        </div>
+        <ChatBody
+          messages={messages}
+          typingStatus={typingStatus}
+          setTypingStatus={setTypingStatus}
+          lastMessageRef={lastMessageRef}
+        />
+        <ChatFooter
+          socket={socket}
+          messages={messages}
+          setMessages={setMessages}
+          setTypingStatus={setTypingStatus}
+        />
       </Box>
       <ChatSidebar
         socket={socket}
