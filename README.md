@@ -4,6 +4,8 @@ Adapted from [Building a chat app with Socket.io and React 🚀](https://dev.to/
 
 ## Instructions for Local Deployment
 
+### Setup
+
 #### Prerequisites
 
 You must have Node.js and npm installed to deploy this web app:
@@ -27,6 +29,45 @@ After running `npm start` in the `client` directory,
 the web app should launch automatically.
 
 Otherwise, open the web app by visiting [`http://localhost:3000`](http://localhost:3000) in your browser.
+
+### Configuration
+
+The server port can be configured by changing the value of `SERVER_PORT`
+in `server/server.js` and `client/src/App.js`.
+
+```js
+// server/server.js
+
+const SERVER_PORT = 8080;
+```
+
+```js
+// client/src/App.js
+
+const SERVER_PORT = 8080;
+const socket = io(`http://localhost:${SERVER_PORT}`);
+```
+
+The client port can be configured by changing the value of `CLIENT_PORT`
+in `server/server.js` and `PORT` in `client/package.json`.
+
+```js
+// server/server.js
+
+const CLIENT_PORT = 3000;
+```
+
+```json
+// client/package.json
+
+{
+    "scripts": {
+        "start": "PORT=3000 react-scripts start",
+        ...
+    },
+    ...
+}
+```
 
 ## Features
 
