@@ -37,6 +37,13 @@ const ChatPage = ({ socket }) => {
     socket.on('typingResponse', (status) => setTypingStatus(status));
   }, [socket]);
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setTypingStatus('');
+    }, 5000);
+    return () => clearTimeout(timeout);
+  }, [typingStatus, setTypingStatus]);
+
   const handleOpenCreateChat = () => {
     setChatName('');
     setOpen(true);
@@ -68,13 +75,11 @@ const ChatPage = ({ socket }) => {
         chats={chats}
         handleOpenCreateChat={handleOpenCreateChat}
       />
-      <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
+      <Box component='main' sx={{ flexGrow: 1, p: 3, mb: 8 }}>
         <Toolbar />
         <Stack direction='column' justifyContent='space-between'>
           <ChatBody
             messages={messages}
-            typingStatus={typingStatus}
-            setTypingStatus={setTypingStatus}
             lastMessageRef={lastMessageRef}
           />
         </Stack>
@@ -83,7 +88,7 @@ const ChatPage = ({ socket }) => {
         socket={socket}
         messages={messages}
         setMessages={setMessages}
-        setTypingStatus={setTypingStatus}
+        typingStatus={typingStatus}
       />
       <ChatSidebar
         socket={socket}

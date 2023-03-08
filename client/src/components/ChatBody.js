@@ -1,15 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { Box, Stack } from '@mui/material';
 
-const ChatBody = ({ messages, typingStatus, setTypingStatus, lastMessageRef }) => {
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setTypingStatus('');
-    }, 5000);
-    return () => clearTimeout(timeout);
-  }, [typingStatus, setTypingStatus]);
-
+const ChatBody = ({ messages, lastMessageRef }) => {
   return (
     <Stack direction='column'>
       {messages.map((message) =>
@@ -50,10 +43,10 @@ const ChatBody = ({ messages, typingStatus, setTypingStatus, lastMessageRef }) =
           </Stack>
         )
       )}
-
-      <div className="message__status">
-        <p>{typingStatus}</p>
-      </div>
+{/* 
+      <Box anchor='flex-end'>
+        {typingStatus}
+      </Box> */}
 
       <div ref={lastMessageRef} />
     </Stack>

@@ -7,7 +7,7 @@ import { InputBase } from '@mui/material';
 import { IconButton } from '@mui/material';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 
-const ChatFooter = ({ socket, messages, setMessages, setTypingStatus }) => {
+const ChatFooter = ({ socket, messages, setMessages, typingStatus }) => {
   const [message, setMessage] = useState('');
 
   const handleTyping = (e) => {
@@ -50,6 +50,15 @@ const ChatFooter = ({ socket, messages, setMessages, setTypingStatus }) => {
         boxShadow: 'none'
       }}
     >
+      <Box
+        sx={{
+          color: 'slategray',
+          fontStyle: 'italic',
+          pl: 5
+        }}
+      >
+        {typingStatus}
+      </Box>
       <Toolbar>
         <Grid
           container
