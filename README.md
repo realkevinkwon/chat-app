@@ -58,14 +58,10 @@ const CLIENT_PORT = 3000;
 ```
 
 ```json
-// client/package.json
-
 {
     "scripts": {
         "start": "PORT=3000 react-scripts start",
-        ...
     },
-    ...
 }
 ```
 
