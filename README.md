@@ -32,31 +32,27 @@ Otherwise, open the web app by visiting [`http://localhost:3000`](http://localho
 
 ### Configuration
 
-The server port can be configured by changing the value of `SERVER_PORT`
-in `server/server.js` and `client/src/App.js`.
+#### Configure the server port
 
+Edit `SERVER_PORT` in `server/server.js`
 ```js
-// server/server.js
-
 const SERVER_PORT = 8080;
 ```
 
+and `SERVER_PORT` in `client/src/App.js`
 ```js
-// client/src/App.js
-
 const SERVER_PORT = 8080;
 const socket = io(`http://localhost:${SERVER_PORT}`);
 ```
 
-The client port can be configured by changing the value of `CLIENT_PORT`
-in `server/server.js` and `PORT` in `client/package.json`.
+#### Configure the client port
 
+Edit `CLIENT_PORT` in `server/server.js`
 ```js
-// server/server.js
-
 const CLIENT_PORT = 3000;
 ```
 
+and `PORT` in `client/package.json`
 ```json
 {
     "scripts": {
