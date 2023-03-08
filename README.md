@@ -6,18 +6,36 @@ Adapted from [Building a chat app with Socket.io and React 🚀](https://dev.to/
 
 ### Chat
 - Chat with your friends!
+
+    | <img src="images/chat.png" alt="Chat" width=600> |
+    |-|
+
 - Participate in group chats with multiple users at once
 
+    | <img src="images/group-chat.png" alt="Group chat" width=600> |
+    |-|
+
 ### Dynamic resizing
-- React.js components allow resizing without compromising on the user experience
 - On-screen elements dynamically re-adjust to maintain a cohesive UI
+
+    | <img src="images/resizing-normal.png" alt="Normal aspect ratio window" width=600> |
+    |-|
+
+    | <img src="images/resizing-wide.png" alt="Wide aspect ratio window" width=600> |
+    |-|
 
 ### Typing status indicator
 - Live typing status indicator to show that
 another user is currently writing a message
 
+    | <img src="images/typing-status.png" alt="Chat with typing status indicator visible" width=600> |
+    |-|
+
 ### Display currently active users
 - See the users who are logged in right now on the sidebar to the right
+
+    | <img src="images/active-users.png" alt="List of active users with current user and sign out button visible" width=240> |
+    |-|
 
 ### Chats saved between logins
 - Users will be able to view previous messages if they join later
