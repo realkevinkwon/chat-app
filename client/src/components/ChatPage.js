@@ -43,14 +43,16 @@ const ChatPage = ({ socket }) => {
   };
 
   const handleCreateChat = () => {
-    setOpen(false);
-    const chat = {
-      name: chatName,
-      id: `${Math.random()}`,
-      owner: sessionStorage.getItem('username'),
-      users: []
+    if (chatName !== '') {
+      setOpen(false);
+      const chat = {
+        name: chatName,
+        id: `${Math.random()}`,
+        owner: sessionStorage.getItem('username'),
+        users: []
+      }
+      setChats([chat, ...chats]);
     }
-    setChats([chat, ...chats]);
   };
 
   const handleClose = () => {

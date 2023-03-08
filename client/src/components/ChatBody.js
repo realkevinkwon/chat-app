@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 
+import { Box, Typography } from '@mui/material';
+import { Stack } from '@mui/material';
+
 const ChatBody = ({ messages, typingStatus, setTypingStatus, lastMessageRef }) => {
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -9,22 +12,53 @@ const ChatBody = ({ messages, typingStatus, setTypingStatus, lastMessageRef }) =
   }, [typingStatus, setTypingStatus]);
 
   return (
-    <div className="message__container">
+    <Stack
+      direction='column'
+      sx={{
+        borderRadius: 10,
+        boxshadow: 3,
+        pt: '8px',
+        pob: '5px',
+        px: 3,
+        mr: 3
+      }}
+    >
       {messages.map((message) =>
         message.name === sessionStorage.getItem('username') ? (
-          <div className="message__chats" key={message.id}>
-            <p className="sender__name">You</p>
-            <div className="message__sender">
-              <p>{message.text}</p>
-            </div>
-          </div>
+          <Stack alignSelf='flex-end'>
+            <Box alignSelf='flex-end' pr={1}>You</Box>
+            <Box
+              sx={{
+                bgcolor: 'primary.main',
+                color: 'white',
+                borderRadius: 10,
+                py: '6px',
+                px: 2,
+                mt: 0.5,
+                mb: 2
+              }}
+            >
+              {message.text}
+            </Box>
+          </Stack>
         ) : (
-          <div className="message__chats" key={message.id}>
-            <p>{message.name}</p>
-            <div className="message__recipient">
-              <p>{message.text}</p>
-            </div>
-          </div>
+          <Stack alignSelf='flex-start'>
+            <Box alignSelf='flex-start' pl={1}>{message.name}</Box>
+            <Box
+              sx={{
+                alignSelf: 'flex-start',
+                border: 1,
+                borderColor: 'lightgray',
+                borderRadius: 10,
+                py: '6px',
+                px: 2,
+                mt: 0.5,
+                mb: 2
+              }}
+            >
+              {message.text}
+            </Box>
+          </Stack>
         )
       )}
 
@@ -33,7 +67,7 @@ const ChatBody = ({ messages, typingStatus, setTypingStatus, lastMessageRef }) =
       </div>
 
       <div ref={lastMessageRef} />
-    </div>
+    </Stack>
   );
 };
 
