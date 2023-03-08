@@ -1,6 +1,18 @@
 import React from 'react';
 
 import { Box, Stack } from '@mui/material';
+import { Typography } from '@mui/material';
+
+const messageStyle = {
+  // whitespace: 'normal',
+  bgcolor: 'primary.main',
+  color: 'white',
+  borderRadius: 3,
+  py: '6px',
+  px: 2,
+  mt: 0.5,
+  mb: 2
+}
 
 const ChatBody = ({ messages, lastMessageRef }) => {
   return (
@@ -9,18 +21,13 @@ const ChatBody = ({ messages, lastMessageRef }) => {
         message.name === sessionStorage.getItem('username') ? (
           <Stack alignSelf='flex-end'>
             <Box alignSelf='flex-end' pr={1}>You</Box>
-            <Box
-              sx={{
-                bgcolor: 'primary.main',
-                color: 'white',
-                borderRadius: 10,
-                py: '6px',
-                px: 2,
-                mt: 0.5,
-                mb: 2
-              }}
-            >
-              {message.text}
+            <Box sx={messageStyle}>
+              <Typography
+                sx={{
+                  bgcolor: 'primary.main',
+                  color: 'white'
+                }}
+              >{message.text}</Typography>
             </Box>
           </Stack>
         ) : (
@@ -28,17 +35,18 @@ const ChatBody = ({ messages, lastMessageRef }) => {
             <Box alignSelf='flex-start' pl={1}>{message.name}</Box>
             <Box
               sx={{
+                // whitespace: 'normal',
                 alignSelf: 'flex-start',
                 border: 1,
                 borderColor: 'lightgray',
-                borderRadius: 10,
+                borderRadius: 3,
                 py: '6px',
                 px: 2,
                 mt: 0.5,
                 mb: 2
               }}
             >
-              {message.text}
+              <Typography>{message.text}</Typography>
             </Box>
           </Stack>
         )

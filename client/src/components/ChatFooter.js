@@ -41,12 +41,13 @@ const ChatFooter = ({ socket, messages, setMessages, typingStatus }) => {
       sx={{
         position: 'fixed',
         top: 'auto',
-        bottom: 10,
+        bottom: 0,
         left: 240,
-        pr: 50
+        pr: 50,
+        pb: 1
       }}
       style={{
-        background: 'transparent',
+        background: 'white',
         boxShadow: 'none'
       }}
     >
@@ -77,7 +78,7 @@ const ChatFooter = ({ socket, messages, setMessages, typingStatus }) => {
                 borderRadius: 10,
                 // left: 240,
                 pt: '8px',
-                pb: '5px',
+                // pb: '5px',
                 px: 3,
                 mr: 3,
               }}
