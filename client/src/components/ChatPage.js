@@ -76,7 +76,7 @@ const ChatPage = ({ socket }) => {
       setOpen(false);
       const chat = {
         name: chatName,
-        id: `${socket.id}${Math.random()}`,
+        id: `${socket.id}1${Date.now()}`,
         owner: sessionStorage.getItem('username'),
         users: [],
         messages: []

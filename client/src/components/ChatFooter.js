@@ -30,7 +30,7 @@ const ChatFooter = ({ socket, messages, setMessages, typingStatus }) => {
       const data = {
         text: message,
         name: sessionStorage.getItem('username'),
-        id: `${socket.id}${Math.random()}`,
+        id: `${socket.id}0${Date.now()}`,
         socketID: socket.id,
       }
       setMessages([...messages, data]);
