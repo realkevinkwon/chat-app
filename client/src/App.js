@@ -4,7 +4,8 @@ import ChatPage from './components/ChatPage';
 
 const { io } = require('socket.io-client');
 
-const socket = io('http://localhost:8080');
+const SERVER_PORT = 8080;
+const socket = io(`http://localhost:${SERVER_PORT}`);
 
 function App() {
   return (

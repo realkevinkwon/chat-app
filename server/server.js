@@ -4,17 +4,20 @@ const { createServer } = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
 
+// Server port for listening to incoming connections.
+const SERVER_PORT = 8080;
+
+// Port for incoming connections
+const CLIENT_PORT = 3000;
+
 // Initialize Express app, HTTP server, and socket.io.
 const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: 'http://localhost:3000'
+    origin: `http://localhost:${CLIENT_PORT}`
   }
 });
-
-// Set port for listening for incoming connections.
-const PORT = 8080;
 
 // Enable Cross-Origin Resource Sharing.
 app.use(cors());
@@ -71,6 +74,6 @@ io.on('connection', (socket) => {
 });
 
 // Listen for incoming connections.
-httpServer.listen(PORT, () => {
-  console.log(`listening on *:${PORT}`);
+httpServer.listen(SERVER_PORT, () => {
+  console.log(`listening on *:${SERVER_PORT}`);
 });
