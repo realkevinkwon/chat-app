@@ -44,7 +44,7 @@ const ChatFooter = ({ socket, messages, setMessages, typingStatus }) => {
         bottom: 0,
         left: 240,
         pr: 50,
-        pb: 1
+        pb: 1,
       }}
       style={{
         background: 'white',
@@ -76,9 +76,8 @@ const ChatFooter = ({ socket, messages, setMessages, typingStatus }) => {
                 border: 1,
                 borderColor: 'lightgray',
                 borderRadius: 10,
-                // left: 240,
-                pt: '8px',
-                // pb: '5px',
+                pt: '5px',
+                pb: '3px',
                 px: 3,
                 mr: 3,
               }}
@@ -89,13 +88,13 @@ const ChatFooter = ({ socket, messages, setMessages, typingStatus }) => {
               onKeyDown={handleTyping}
             />
           </Grid>
-          <Grid item>
+          <Grid item xs={1}>
             <IconButton
               sx={{
                 borderRadius: 10,
                 width: 40,
-                mt: 0.4,
-                // right: 160,
+                mt: 0.1,
+                ml: 2,
                 color: 'white',
                 backgroundColor: 'primary.main'
               }}

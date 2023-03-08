@@ -76,22 +76,29 @@ const ChatPage = ({ socket }) => {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box>
       <CssBaseline />
       <ChatToolbar />
       <ChatList
         chats={chats}
         handleOpenCreateChat={handleOpenCreateChat}
       />
-      <Box>
-        <Box component='main' sx={{ flexGrow: 1, p: 3, mb: 8 }}>
+      <Box
+        position='absolute'
+        left={240}
+        right={160}
+      >
+        <Box
+          sx={{
+            p: 3,
+            mb: 8,
+          }}
+        >
           <Toolbar />
-          <Stack direction='column' justifyContent='space-between'>
-            <ChatBody
-              messages={messages}
-              lastMessageRef={lastMessageRef}
-            />
-          </Stack>
+          <ChatBody
+            messages={messages}
+            lastMessageRef={lastMessageRef}
+          />
         </Box>
         <ChatFooter
           socket={socket}
