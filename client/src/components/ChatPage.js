@@ -22,6 +22,7 @@ const ChatPage = ({ socket }) => {
   const lastMessageRef = useRef(null);
 
   // Set users, chats, and messages upon joining.
+  // Allows users to continue from where they left off upon re-joining.
   useEffect(() => {
     socket.on('newUserResponse', (new_users, new_chats, new_messages) => {
       setUsers(new_users);
