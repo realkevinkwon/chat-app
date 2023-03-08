@@ -51,11 +51,6 @@ const ChatBody = ({ messages, lastMessageRef }) => {
           </Stack>
         )
       )}
-{/* 
-      <Box anchor='flex-end'>
-        {typingStatus}
-      </Box> */}
-
       <div ref={lastMessageRef} />
     </Stack>
   );

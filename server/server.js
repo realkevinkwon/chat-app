@@ -36,7 +36,7 @@ let users = [];
   },
   ...
 ] */
-// let chats = [];
+let chats = [];
 
 // Run upon new connection.
 io.on('connection', (socket) => {
@@ -46,24 +46,24 @@ io.on('connection', (socket) => {
   socket.on('newUser', (user) => {
     users.push(user);
     console.log(users);
-    io.emit('newUserResponse', users);
+    io.emit('newUserResponse', users, chats);
   });
 
-  // // Chat is created.
-  // socket.on('createChat', (chat) => {
-  //   console.log(`${chat.name} has been created by ${chat.owner}`);
-  //   chats.push(chat);
-  //   console.log(chats);
-  //   socket.broadcast.emit('createChatResponse', chats);
-  // });
+  // Chat is created.
+  socket.on('createChat', (chat) => {
+    console.log(`${chat.name} has been created by ${chat.owner}`);
+    chats.push(chat);
+    console.log(chats);
+    socket.broadcast.emit('createChatResponse', chats);
+  });
 
-  // // Chat is deleted.
-  // socket.on('deleteChat', (chat) => {
-  //   console.log(`${chat.name} has been deleted`)
-  //   chats = chats.filter((item) => item.id !== chat.id);
-  //   console.log(chats);
-  //   socket.broadcast.emit('deleteChatResponse', chats);
-  // });
+  // Chat is deleted.
+  socket.on('deleteChat', (chat) => {
+    console.log(`${chat.name} has been deleted`)
+    chats = chats.filter((item) => item.id !== chat.id);
+    console.log(chats);
+    socket.broadcast.emit('deleteChatResponse', chats);
+  });
 
   // // User joins a chat.
   // socket.on('joinChat', (user, chat) => {
@@ -91,7 +91,7 @@ io.on('connection', (socket) => {
     console.log('a user disconnected');
     users = users.filter((user) => user.socketID !== socket.id);
     console.log(users);
-    io.emit('newUserResponse', users);
+    io.emit('newUserResponse', users, chats);
     socket.disconnect();
   });
 });

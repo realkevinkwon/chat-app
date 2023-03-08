@@ -22,8 +22,11 @@ const ChatPage = ({ socket }) => {
   const lastMessageRef = useRef(null);
 
   useEffect(() => {
-    socket.on('newUserResponse', (new_users) => setUsers(new_users));
-  }, [socket, users]);
+    socket.on('newUserResponse', (new_users, new_chats) => {
+      setUsers(new_users);
+      setChats(new_chats);
+    });
+  }, [socket]);
 
   useEffect(() => {
     socket.on('messageResponse', (message) => setMessages([...messages, message]));
@@ -44,9 +47,17 @@ const ChatPage = ({ socket }) => {
     return () => clearTimeout(timeout);
   }, [typingStatus, setTypingStatus]);
 
+  useEffect(() => {
+    socket.on('createChatResponse', (new_chats) => setChats(new_chats));
+  }, [socket]);
+
   const handleOpenCreateChat = () => {
     setChatName('');
     setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   const handleCreateChat = () => {
@@ -54,16 +65,14 @@ const ChatPage = ({ socket }) => {
       setOpen(false);
       const chat = {
         name: chatName,
-        id: `${Math.random()}`,
+        id: `${socket.id}${Math.random()}`,
         owner: sessionStorage.getItem('username'),
-        users: []
+        users: [],
+        messages: []
       }
       setChats([chat, ...chats]);
+      socket.emit('createChat', chat);
     }
-  };
-
-  const handleClose = () => {
-    setOpen(false);
   };
 
   return (
@@ -71,25 +80,26 @@ const ChatPage = ({ socket }) => {
       <CssBaseline />
       <ChatToolbar />
       <ChatList
-        socket={socket}
         chats={chats}
         handleOpenCreateChat={handleOpenCreateChat}
       />
-      <Box component='main' sx={{ flexGrow: 1, p: 3, mb: 8 }}>
-        <Toolbar />
-        <Stack direction='column' justifyContent='space-between'>
-          <ChatBody
-            messages={messages}
-            lastMessageRef={lastMessageRef}
-          />
-        </Stack>
+      <Box>
+        <Box component='main' sx={{ flexGrow: 1, p: 3, mb: 8 }}>
+          <Toolbar />
+          <Stack direction='column' justifyContent='space-between'>
+            <ChatBody
+              messages={messages}
+              lastMessageRef={lastMessageRef}
+            />
+          </Stack>
+        </Box>
+        <ChatFooter
+          socket={socket}
+          messages={messages}
+          setMessages={setMessages}
+          typingStatus={typingStatus}
+        />
       </Box>
-      <ChatFooter
-        socket={socket}
-        messages={messages}
-        setMessages={setMessages}
-        typingStatus={typingStatus}
-      />
       <ChatSidebar
         socket={socket}
         users={users}
