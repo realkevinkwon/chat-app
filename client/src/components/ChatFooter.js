@@ -40,8 +40,9 @@ const ChatFooter = ({ socket, messages, setMessages, setTypingStatus }) => {
         variant='standard'
         sx={{
           flexGrow: 1,
+          border: 1,
+          borderColor: 'lightgray',
           borderRadius: 10,
-          boxShadow: 3,
           pt: '8px',
           pb: '5px',
           px: 3,
@@ -57,7 +58,6 @@ const ChatFooter = ({ socket, messages, setMessages, setTypingStatus }) => {
         sx={{
           borderRadius: 10,
           width: 48,
-          boxShadow: 3,
           color: 'white',
           backgroundColor: 'primary.main'
         }}

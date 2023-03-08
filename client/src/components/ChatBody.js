@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { Box, Typography } from '@mui/material';
-import { Stack } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 
 const ChatBody = ({ messages, typingStatus, setTypingStatus, lastMessageRef }) => {
   useEffect(() => {
@@ -12,17 +11,7 @@ const ChatBody = ({ messages, typingStatus, setTypingStatus, lastMessageRef }) =
   }, [typingStatus, setTypingStatus]);
 
   return (
-    <Stack
-      direction='column'
-      sx={{
-        borderRadius: 10,
-        boxshadow: 3,
-        pt: '8px',
-        pob: '5px',
-        px: 3,
-        mr: 3
-      }}
-    >
+    <Stack direction='column'>
       {messages.map((message) =>
         message.name === sessionStorage.getItem('username') ? (
           <Stack alignSelf='flex-end'>
