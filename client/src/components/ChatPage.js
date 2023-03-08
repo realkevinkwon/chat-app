@@ -5,7 +5,7 @@ import ChatBody from './ChatBody';
 import ChatFooter from './ChatFooter';
 import ChatList from './ChatList';
 
-import { Box } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import { CssBaseline } from '@mui/material';
 import { Toolbar } from '@mui/material';
 import { TextField } from '@mui/material';
@@ -70,19 +70,21 @@ const ChatPage = ({ socket }) => {
       />
       <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-        <ChatBody
-          messages={messages}
-          typingStatus={typingStatus}
-          setTypingStatus={setTypingStatus}
-          lastMessageRef={lastMessageRef}
-        />
-        <ChatFooter
-          socket={socket}
-          messages={messages}
-          setMessages={setMessages}
-          setTypingStatus={setTypingStatus}
-        />
+        <Stack direction='column' justifyContent='space-between'>
+          <ChatBody
+            messages={messages}
+            typingStatus={typingStatus}
+            setTypingStatus={setTypingStatus}
+            lastMessageRef={lastMessageRef}
+          />
+        </Stack>
       </Box>
+      <ChatFooter
+        socket={socket}
+        messages={messages}
+        setMessages={setMessages}
+        setTypingStatus={setTypingStatus}
+      />
       <ChatSidebar
         socket={socket}
         users={users}

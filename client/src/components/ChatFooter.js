@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
+import { Toolbar } from '@mui/material';
+import { AppBar } from '@mui/material';
 import { InputBase } from '@mui/material';
 import { IconButton } from '@mui/material';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
@@ -35,37 +37,66 @@ const ChatFooter = ({ socket, messages, setMessages, setTypingStatus }) => {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <InputBase
-        variant='standard'
-        sx={{
-          flexGrow: 1,
-          border: 1,
-          borderColor: 'lightgray',
-          borderRadius: 10,
-          pt: '8px',
-          pb: '5px',
-          px: 3,
-          mr: 3
-        }}
-        type='text'
-        placeholder='Enter message'
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        onKeyDown={handleTyping}
-      />
-      <IconButton
-        sx={{
-          borderRadius: 10,
-          width: 48,
-          color: 'white',
-          backgroundColor: 'primary.main'
-        }}
-        onClick={handleSendMessage}
-      >
-        <ArrowUpwardIcon />
-      </IconButton>
-    </Box>
+    <AppBar
+      sx={{
+        position: 'fixed',
+        top: 'auto',
+        bottom: 10,
+        left: 240,
+        pr: 50
+      }}
+      style={{
+        background: 'transparent',
+        boxShadow: 'none'
+      }}
+    >
+      <Toolbar>
+        <Grid
+          container
+          sx={{
+            border: 1,
+            justifyContent: 'space-between'
+          }}
+        >
+          <Grid item xs={11}>
+            <InputBase
+              variant='standard'
+              fullWidth
+              sx={{
+                border: 1,
+                borderColor: 'lightgray',
+                borderRadius: 10,
+                // left: 240,
+                pt: '8px',
+                pb: '5px',
+                px: 3,
+                mr: 3,
+              }}
+              type='text'
+              placeholder='Enter message'
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              onKeyDown={handleTyping}
+            />
+          </Grid>
+          <Grid item>
+            <IconButton
+              sx={{
+                borderRadius: 10,
+                width: 40,
+                mt: 0.4,
+                // right: 160,
+                color: 'white',
+                backgroundColor: 'primary.main'
+              }}
+              onClick={handleSendMessage}
+            >
+              <ArrowUpwardIcon />
+            </IconButton>
+          </Grid>
+        </Grid>
+      </Toolbar>
+    </AppBar>
   );
 };
 
